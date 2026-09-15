@@ -4,7 +4,7 @@
 
 Документ переводит конкурсное ТЗ в продуктовые границы и проверяемые группы требований. Это еще не OpenSpec и не план реализации. После согласования этой проработки требования будут разделены на отдельные спецификации возможностей продукта.
 
-Основной источник требований — [техническое задание](../../artifacts/01-tz-platforma-podbora-robotizirovannyh-resheniy.pdf). [Дополнительные пояснения](../../artifacts/02-dopolnitelnye-poyasneniya-i-dopuscheniya-k-tz.pdf) уточняют трактовку, но не заменяют ТЗ. Файл [инструкции к Q&A](../../artifacts/03-lct-2026-sessiya-voprosov-i-otvetov.pdf) не содержит ответов по кейсу и не изменяет требования.
+Основной источник требований — [техническое задание](../../artifacts/01-tz-platforma-podbora-robotizirovannyh-resheniy/01-tz-platforma-podbora-robotizirovannyh-resheniy.pdf). [Дополнительные пояснения](../../artifacts/02-dopolnitelnye-poyasneniya-i-dopuscheniya-k-tz/02-dopolnitelnye-poyasneniya-i-dopuscheniya-k-tz.pdf) уточняют трактовку, но не заменяют ТЗ. Файл [инструкции к Q&A](../../artifacts/03-lct-2026-sessiya-voprosov-i-otvetov/03-lct-2026-sessiya-voprosov-i-otvetov.pdf) не содержит ответов по кейсу и не изменяет требования.
 
 ## 2. Проблема и продуктовый результат
 

@@ -1,0 +1,425 @@
+{
+  "format_version": 1,
+  "object_type": "warehouse",
+  "title": "ДЕМО-ДАТАСЕТ: СКЛАД (объект для расчёта роботизации)",
+  "source": {
+    "file": "04-demo-dataset-obekty-sklad-aeroport-meduchrezhdenie.xlsx",
+    "sheet": "Склад"
+  },
+  "parameter_count": 42,
+  "sections": [
+    {
+      "name": "ОБЩИЕ ПАРАМЕТРЫ ОБЪЕКТА",
+      "parameters": [
+        {
+          "source_row": 4,
+          "parameter": "Общая площадь склада",
+          "unit": "м²",
+          "base_value": 20000,
+          "min_value": 10000,
+          "max_value": 100000,
+          "note": "Типичный FFC/RDC в логистическом парке. Источник: отраслевые бенчмарки РФ 2023–2024"
+        },
+        {
+          "source_row": 5,
+          "parameter": "Площадь активной (роботизируемой) зоны",
+          "unit": "м²",
+          "base_value": 10000,
+          "min_value": 5000,
+          "max_value": 50000,
+          "note": "50% от общей площади"
+        },
+        {
+          "source_row": 6,
+          "parameter": "Высота потолков в зоне хранения",
+          "unit": "м",
+          "base_value": 10,
+          "min_value": 5,
+          "max_value": 16,
+          "note": "Влияет на выбор типа решений (особенно в случае шаттловой системы)"
+        },
+        {
+          "source_row": 7,
+          "parameter": "Количество этажей (мезонинов)",
+          "unit": "шт.",
+          "base_value": 1,
+          "min_value": 1,
+          "max_value": 3,
+          "note": "Для многоэтажных решений необходимы лифты - учитывается в CAPEX"
+        },
+        {
+          "source_row": 8,
+          "parameter": "Ширина главных проездов",
+          "unit": "м",
+          "base_value": 3.5,
+          "min_value": 2.5,
+          "max_value": 6,
+          "note": "Определяет допустимые габариты робота"
+        },
+        {
+          "source_row": 9,
+          "parameter": "Ширина рабочих проходов между стеллажами",
+          "unit": "м",
+          "base_value": 2.8,
+          "min_value": 1.5,
+          "max_value": 4.5,
+          "note": "Узкий проход (1.5-2.0 м) - только специализированные решения"
+        },
+        {
+          "source_row": 10,
+          "parameter": "Тип напольного покрытия",
+          "unit": "-",
+          "base_value": "Промышленный бетон",
+          "min_value": "-",
+          "max_value": "-",
+          "note": "Влияет на выбор колёс/гусениц роботов-транспортировщиков. Альтернативы: эпоксид, асфальт"
+        },
+        {
+          "source_row": 11,
+          "parameter": "Ровность пола (отклонение)",
+          "unit": "мм/2м",
+          "base_value": 3,
+          "min_value": 1,
+          "max_value": 8,
+          "note": "DIN 15185 или FM2. Критично для AutoStore и высотных решений"
+        }
+      ]
+    },
+    {
+      "name": "РЕЖИМ РАБОТЫ",
+      "parameters": [
+        {
+          "source_row": 13,
+          "parameter": "Количество рабочих смен в сутки",
+          "unit": "смен",
+          "base_value": 2,
+          "min_value": 1,
+          "max_value": 3,
+          "note": "Стандартно: 2 смены по 12 ч/сутки"
+        },
+        {
+          "source_row": 14,
+          "parameter": "Рабочих дней в году",
+          "unit": "дн.",
+          "base_value": 365,
+          "min_value": 365,
+          "max_value": 365,
+          "note": null
+        },
+        {
+          "source_row": 15,
+          "parameter": "Продолжительность смены",
+          "unit": "ч",
+          "base_value": 11,
+          "min_value": 10,
+          "max_value": 11,
+          "note": "С учётом перерывов на обед и техн. пауз"
+        },
+        {
+          "source_row": 16,
+          "parameter": "Пиковый коэффициент нагрузки",
+          "unit": "-",
+          "base_value": 1.5,
+          "min_value": 1.2,
+          "max_value": 2.5,
+          "note": "Отношение макс. часовой нагрузки к среднечасовой. e-com: до 2.5"
+        }
+      ]
+    },
+    {
+      "name": "ОПЕРАЦИИ: ОБЪЁМ И ПРОИЗВОДИТЕЛЬНОСТЬ",
+      "parameters": [
+        {
+          "source_row": 18,
+          "parameter": "Объём приёмки (поддоны/сутки)",
+          "unit": "поддон/сут",
+          "base_value": 1000,
+          "min_value": 500,
+          "max_value": 5000,
+          "note": "Входящий поток. 1 еврооддон ≈ 33 короба"
+        },
+        {
+          "source_row": 19,
+          "parameter": "Объём отгрузки (поддоны/сутки)",
+          "unit": "поддон/сут",
+          "base_value": 1000,
+          "min_value": 500,
+          "max_value": 5000,
+          "note": "Исходящий поток. Включая консолидацию"
+        },
+        {
+          "source_row": 20,
+          "parameter": "Объём отбора (строк/сутки, всего)",
+          "unit": "строк/сут",
+          "base_value": 100000,
+          "min_value": 50000,
+          "max_value": 500000,
+          "note": "Строка = 1 позиция в заказе. Ключевой KPI для комплектации"
+        },
+        {
+          "source_row": 21,
+          "parameter": "Объём отбора (штук/сутки, всего)",
+          "unit": "шт./сут",
+          "base_value": 150000,
+          "min_value": 75000,
+          "max_value": 750000,
+          "note": "Среднее кол-во штук на строку ~1,5"
+        },
+        {
+          "source_row": 22,
+          "parameter": "Доля мелкоштучного отбора (piece-pick)",
+          "unit": "%",
+          "base_value": 30,
+          "min_value": 10,
+          "max_value": 80,
+          "note": "Остаток - коробочный или паллетный отбор"
+        },
+        {
+          "source_row": 23,
+          "parameter": "Количество SKU (активных)",
+          "unit": "SKU",
+          "base_value": 2000,
+          "min_value": 1000,
+          "max_value": 10000,
+          "note": "Влияет на сложность маршрутизации и алгоритм слотирования"
+        },
+        {
+          "source_row": 24,
+          "parameter": "Доля SKU с быстрым оборотом (A-класс)",
+          "unit": "%",
+          "base_value": 20,
+          "min_value": 10,
+          "max_value": 40,
+          "note": null
+        }
+      ]
+    },
+    {
+      "name": "ПЕРСОНАЛ",
+      "parameters": [
+        {
+          "source_row": 26,
+          "parameter": "Общая численность персонала склада",
+          "unit": "чел.",
+          "base_value": 180,
+          "min_value": 30,
+          "max_value": 700,
+          "note": "Включая ИТР, кладовщиков, водителей погрузчиков, уборку"
+        },
+        {
+          "source_row": 27,
+          "parameter": "Из них: отборщики (комплектовщики)",
+          "unit": "чел.",
+          "base_value": 100,
+          "min_value": 15,
+          "max_value": 500,
+          "note": "Целевая группа для экономии при роботизации"
+        },
+        {
+          "source_row": 28,
+          "parameter": "Из них: операторы погрузчиков",
+          "unit": "чел.",
+          "base_value": 25,
+          "min_value": 5,
+          "max_value": 80,
+          "note": "Целевая функция для автономных погрузчиков / VNA"
+        },
+        {
+          "source_row": 29,
+          "parameter": "Из них: операторы упаковочных линий",
+          "unit": "чел.",
+          "base_value": 20,
+          "min_value": 5,
+          "max_value": 60,
+          "note": "Частично автоматизируется коботами"
+        },
+        {
+          "source_row": 30,
+          "parameter": "Средняя з/п отборщика (gross)",
+          "unit": "руб./мес.",
+          "base_value": 100000,
+          "min_value": 70000,
+          "max_value": 150000,
+          "note": "gross"
+        },
+        {
+          "source_row": 31,
+          "parameter": "Средняя з/п оператора погрузчика (gross)",
+          "unit": "руб./мес.",
+          "base_value": 120000,
+          "min_value": 80000,
+          "max_value": 170000,
+          "note": "Квалификация выше; дефицит на рынке"
+        },
+        {
+          "source_row": 32,
+          "parameter": "Коэффициент начислений на ФОТ (страховые взносы)",
+          "unit": "-",
+          "base_value": 1.302,
+          "min_value": 1.302,
+          "max_value": 1.302,
+          "note": "ОПФ 22% + ОМС 5.1% + ОСС 2.9% + НСиПЗ 0.2% = 30.2%"
+        },
+        {
+          "source_row": 33,
+          "parameter": "Средняя выработка отборщика (строк/ч)",
+          "unit": "строк/ч·чел",
+          "base_value": 150,
+          "min_value": 80,
+          "max_value": 200,
+          "note": "До роботизации; учитывает ходьбу, поиск, упаковку. Зависит от размера склада"
+        },
+        {
+          "source_row": 34,
+          "parameter": "Коэффициент потерь рабочего времени (отпуск, болезнь, текучесть)",
+          "unit": "%",
+          "base_value": 25,
+          "min_value": 15,
+          "max_value": 35,
+          "note": "Для расчёта потребной численности: +25% к нормативной"
+        }
+      ]
+    },
+    {
+      "name": "МАРШРУТЫ И ПЛАНИРОВКА",
+      "parameters": [
+        {
+          "source_row": 36,
+          "parameter": "Средняя длина маршрута отборщика на 1 строку",
+          "unit": "м",
+          "base_value": 25,
+          "min_value": 15,
+          "max_value": 60,
+          "note": "Зависит от размера склада и системы слотирования"
+        },
+        {
+          "source_row": 37,
+          "parameter": "Протяжённость конвейерной/транспортной системы",
+          "unit": "м",
+          "base_value": 350,
+          "min_value": 0,
+          "max_value": 2000,
+          "note": "0 если её нет; учитывается при выборе решения"
+        }
+      ]
+    },
+    {
+      "name": "ХРАНЕНИЕ И ХАРАКТЕРИСТИКИ ГРУЗОВ",
+      "parameters": [
+        {
+          "source_row": 39,
+          "parameter": "Тип стеллажной системы",
+          "unit": "-",
+          "base_value": "Фронтальные паллетные",
+          "min_value": "-",
+          "max_value": "-",
+          "note": "Альтернативы: Shuttle, AutoStore, Miniload, Drive-in, Push-back"
+        },
+        {
+          "source_row": 40,
+          "parameter": "Количество паллетомест",
+          "unit": "м/п",
+          "base_value": 20000,
+          "min_value": 10000,
+          "max_value": 100000,
+          "note": "Ёмкость склада"
+        },
+        {
+          "source_row": 41,
+          "parameter": "Средняя масса грузовой единицы (паллет)",
+          "unit": "кг",
+          "base_value": 800,
+          "min_value": 200,
+          "max_value": 1500,
+          "note": "Влияет на грузоподъёмность роботов"
+        },
+        {
+          "source_row": 42,
+          "parameter": "Средняя масса штучной единицы (SKU)",
+          "unit": "кг",
+          "base_value": 1.8,
+          "min_value": 0.1,
+          "max_value": 20,
+          "note": "Критично для G2P-систем"
+        },
+        {
+          "source_row": 43,
+          "parameter": "Средние габариты паллеты (Д×Ш×В)",
+          "unit": "мм",
+          "base_value": "1200×800×1600",
+          "min_value": "-",
+          "max_value": "-",
+          "note": "Евростандарт"
+        },
+        {
+          "source_row": 44,
+          "parameter": "Средние габариты штучной единицы (Д×Ш×В)",
+          "unit": "мм",
+          "base_value": "300×200×150",
+          "min_value": "-",
+          "max_value": "-",
+          "note": "Среднестатистический короб"
+        },
+        {
+          "source_row": 45,
+          "parameter": "Доля негабаритных/нестандартных грузов",
+          "unit": "%",
+          "base_value": 5,
+          "min_value": 0,
+          "max_value": 30,
+          "note": "Нестандарт - барьер для автоматизации; остаётся ручным"
+        }
+      ]
+    },
+    {
+      "name": "ИНФРАСТРУКТУРА И ОГРАНИЧЕНИЯ",
+      "parameters": [
+        {
+          "source_row": 47,
+          "parameter": "Мощность электроснабжения (доступная)",
+          "unit": "кВт",
+          "base_value": 500,
+          "min_value": 100,
+          "max_value": 3000,
+          "note": "Для зарядных станций роботов"
+        },
+        {
+          "source_row": 48,
+          "parameter": "Наличие WMS",
+          "unit": "-",
+          "base_value": "Да",
+          "min_value": "Да",
+          "max_value": "Да",
+          "note": "Наличие WMS обязательно для роботизации"
+        },
+        {
+          "source_row": 49,
+          "parameter": "Наличие ERP/1С",
+          "unit": "-",
+          "base_value": "1С:ERP",
+          "min_value": "-",
+          "max_value": "-",
+          "note": "Интеграция через REST API или COM-коннектор"
+        },
+        {
+          "source_row": 50,
+          "parameter": "Планируемый бюджет на роботизацию (CAPEX)",
+          "unit": "млн руб.",
+          "base_value": 80,
+          "min_value": 10,
+          "max_value": 500,
+          "note": "Ориентир для фильтрации решений. Лизинг/RaaS — альтернатива"
+        },
+        {
+          "source_row": 51,
+          "parameter": "Горизонт расчёта окупаемости",
+          "unit": "лет",
+          "base_value": 5,
+          "min_value": 3,
+          "max_value": 10,
+          "note": "Типовой горизонт ТЭО для складской автоматизации"
+        }
+      ]
+    }
+  ]
+}

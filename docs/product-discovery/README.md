@@ -107,9 +107,9 @@ ML не должен определять критические огранич�
 
 ## Использованные исходные материалы
 
-- [Основное ТЗ](../../artifacts/01-tz-platforma-podbora-robotizirovannyh-resheniy.pdf)
-- [Дополнительные пояснения](../../artifacts/02-dopolnitelnye-poyasneniya-i-dopuscheniya-k-tz.pdf)
-- [Инструкция к Q&A-сессии](../../artifacts/03-lct-2026-sessiya-voprosov-i-otvetov.pdf)
-- [Демонстрационные параметры объектов](../../artifacts/04-demo-dataset-obekty-sklad-aeroport-meduchrezhdenie.xlsx)
-- [Примеры решений по отраслям](../../artifacts/05-primery-resheniy-v-otraslyah.docx)
-- [Выгрузка каталога](../../artifacts/06-catalog-brs-export-v4.csv)
+- [Основное ТЗ](../../artifacts/01-tz-platforma-podbora-robotizirovannyh-resheniy/01-tz-platforma-podbora-robotizirovannyh-resheniy.pdf)
+- [Дополнительные пояснения](../../artifacts/02-dopolnitelnye-poyasneniya-i-dopuscheniya-k-tz/02-dopolnitelnye-poyasneniya-i-dopuscheniya-k-tz.pdf)
+- [Инструкция к Q&A-сессии](../../artifacts/03-lct-2026-sessiya-voprosov-i-otvetov/03-lct-2026-sessiya-voprosov-i-otvetov.pdf)
+- [Демонстрационные параметры объектов](../../artifacts/04-demo-dataset-obekty-sklad-aeroport-meduchrezhdenie/04-demo-dataset-obekty-sklad-aeroport-meduchrezhdenie.xlsx)
+- [Примеры решений по отраслям](../../artifacts/05-primery-resheniy-v-otraslyah/05-primery-resheniy-v-otraslyah.docx)
+- [Выгрузка каталога](../../artifacts/06-catalog-brs-export-v4/06-catalog-brs-export-v4.csv)
