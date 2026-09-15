@@ -10,12 +10,12 @@
 
 | Файл | Фактическая роль |
 | --- | --- |
-| [Основное ТЗ](../../artifacts/01-tz-platforma-podbora-robotizirovannyh-resheniy.pdf) | Требования, формулы, ограничения и критерии оценки |
-| [Дополнительные пояснения](../../artifacts/02-dopolnitelnye-poyasneniya-i-dopuscheniya-k-tz.pdf) | Уточнение CAPEX/OPEX, амортизации, RaaS, каталога и самостоятельных допущений |
-| [Инструкция к Q&A](../../artifacts/03-lct-2026-sessiya-voprosov-i-otvetov.pdf) | Только регламент подачи вопросов; ответов по кейсу нет |
-| [Демо-датасет объектов](../../artifacts/04-demo-dataset-obekty-sklad-aeroport-meduchrezhdenie.xlsx) | Нормативная конфигурация одного типового объекта каждого вида |
-| [Примеры решений](../../artifacts/05-primery-resheniy-v-otraslyah.docx) | Иллюстративные ТТХ и перечень открытых источников |
-| [Каталог v4](../../artifacts/06-catalog-brs-export-v4.csv) | Плоская выгрузка продуктов, сценариев, кейсов и цен |
+| [Основное ТЗ](../../artifacts/01-tz-platforma-podbora-robotizirovannyh-resheniy/01-tz-platforma-podbora-robotizirovannyh-resheniy.pdf) | Требования, формулы, ограничения и критерии оценки |
+| [Дополнительные пояснения](../../artifacts/02-dopolnitelnye-poyasneniya-i-dopuscheniya-k-tz/02-dopolnitelnye-poyasneniya-i-dopuscheniya-k-tz.pdf) | Уточнение CAPEX/OPEX, амортизации, RaaS, каталога и самостоятельных допущений |
+| [Инструкция к Q&A](../../artifacts/03-lct-2026-sessiya-voprosov-i-otvetov/03-lct-2026-sessiya-voprosov-i-otvetov.pdf) | Только регламент подачи вопросов; ответов по кейсу нет |
+| [Демо-датасет объектов](../../artifacts/04-demo-dataset-obekty-sklad-aeroport-meduchrezhdenie/04-demo-dataset-obekty-sklad-aeroport-meduchrezhdenie.xlsx) | Нормативная конфигурация одного типового объекта каждого вида |
+| [Примеры решений](../../artifacts/05-primery-resheniy-v-otraslyah/05-primery-resheniy-v-otraslyah.docx) | Иллюстративные ТТХ и перечень открытых источников |
+| [Каталог v4](../../artifacts/06-catalog-brs-export-v4/06-catalog-brs-export-v4.csv) | Плоская выгрузка продуктов, сценариев, кейсов и цен |
 
 ## 3. Демо-датасет объектов XLSX
 
