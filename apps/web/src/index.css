@@ -1,0 +1,8 @@
+@import "@fontsource-variable/commissioner";
+@import "@fontsource-variable/onest";
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Onest Variable", sans-serif;
+  --font-display: "Commissioner Variable", sans-serif;
+}
