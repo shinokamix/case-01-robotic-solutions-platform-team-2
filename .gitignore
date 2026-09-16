@@ -1,2 +1,5 @@
 # JetBrains IDE project metadata
 .idea/
+
+# macOS Finder metadata
+.DS_Store
