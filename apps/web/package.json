@@ -5,15 +5,17 @@
   "type": "module",
   "scripts": {
     "dev": "vp dev",
-    "build": "tsc -b && vp build",
+    "build": "vp build && tsc -b",
     "lint": "vp lint",
     "preview": "vp preview"
   },
   "dependencies": {
+    "@tanstack/react-router": "^1.170.36",
     "react": "^19.2.8",
     "react-dom": "^19.2.8"
   },
   "devDependencies": {
+    "@tanstack/router-plugin": "^1.168.38",
     "@types/node": "^24.13.3",
     "@types/react": "^19.2.18",
     "@types/react-dom": "^19.2.7",
