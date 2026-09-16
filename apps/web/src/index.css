@@ -1,22 +1,8 @@
+@import "@fontsource-variable/commissioner";
+@import "@fontsource-variable/onest";
 @import "tailwindcss";
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-button,
-input,
-textarea,
-select {
-  font: inherit;
-}
-
-img,
-svg {
-  display: block;
-  max-width: 100%;
+@theme {
+  --font-sans: "Onest Variable", sans-serif;
+  --font-display: "Commissioner Variable", sans-serif;
 }
