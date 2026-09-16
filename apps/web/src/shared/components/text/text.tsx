@@ -1,9 +1,9 @@
+import { cn } from "cn";
 import type {
   ComponentPropsWithoutRef,
   CSSProperties,
   ElementType,
 } from "react";
-import { cn } from "cn";
 
 const textSizes = {
   sm: [
