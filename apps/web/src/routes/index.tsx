@@ -1,9 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Menu } from "../modules/menu";
 
 function HomePage() {
   return (
-    <main>
-      <h1>Платформа подбора роботизированных решений</h1>
+    <main className="relative min-h-dvh bg-black">
+      <Menu />
     </main>
   );
 }

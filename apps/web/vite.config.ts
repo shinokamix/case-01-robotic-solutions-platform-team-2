@@ -1,3 +1,4 @@
+import tailwindcss from "@tailwindcss/vite";
 import { TanStackRouterVite } from "@tanstack/router-plugin/vite";
 import react from "@vitejs/plugin-react";
 import { defineConfig, lazyPlugins } from "vite-plus";
@@ -28,5 +29,5 @@ export default defineConfig({
       },
     ],
   },
-  plugins: lazyPlugins(() => [TanStackRouterVite(), react()]),
+  plugins: lazyPlugins(() => [TanStackRouterVite(), react(), tailwindcss()]),
 });

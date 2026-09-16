@@ -11,17 +11,21 @@
     "preview": "vp preview"
   },
   "dependencies": {
+    "@base-ui/react": "^1.8.0",
     "@tanstack/react-router": "^1.170.36",
+    "cn": "^0.3.0",
     "react": "^19.2.8",
     "react-dom": "^19.2.8"
   },
   "devDependencies": {
+    "@tailwindcss/vite": "^4.3.3",
     "@tanstack/router-plugin": "^1.168.38",
     "@types/node": "^24.13.3",
     "@types/react": "^19.2.18",
     "@types/react-dom": "^19.2.7",
     "@vitejs/plugin-react": "^6.1.1",
     "knip": "^6.36.0",
+    "tailwindcss": "^4.3.3",
     "typescript": "~6.0.2",
     "vite": "npm:@voidzero-dev/vite-plus-core@0.3.1",
     "vite-plus": "0.3.1"
