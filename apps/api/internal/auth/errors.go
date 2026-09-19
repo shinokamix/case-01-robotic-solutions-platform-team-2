@@ -10,6 +10,5 @@ var (
 	ErrEmailAlreadyExists = errors.New("email already registered")
 	ErrInvalidCredentials = errors.New("invalid credentials")
 	ErrUnauthenticated    = errors.New("unauthenticated")
-	ErrAdminAlreadyExists = errors.New("admin already exists")
 	ErrNotFound           = errors.New("not found")
 )

@@ -96,22 +96,11 @@ func (store *Store) DeleteSession(ctx context.Context, tokenHash []byte) error {
 }
 
 func (store *Store) CreateAdmin(ctx context.Context, user auth.User) error {
-	queries := sqlc.New(store.pool)
-	_, err := queries.CreateUser(ctx, createUserParams(user))
-	if isAdminConflict(err) {
-		return auth.ErrAdminAlreadyExists
+	_, err := sqlc.New(store.pool).CreateUser(ctx, createUserParams(user))
+	if isEmailConflict(err) {
+		return auth.ErrEmailAlreadyExists
 	}
-	if !isEmailConflict(err) {
-		return err
-	}
-	existing, findErr := queries.GetUserByEmail(ctx, user.Email)
-	if findErr != nil {
-		return findErr
-	}
-	if auth.Role(existing.Role) == auth.RoleAdmin {
-		return auth.ErrAdminAlreadyExists
-	}
-	return auth.ErrEmailAlreadyExists
+	return err
 }
 
 func createUserParams(user auth.User) sqlc.CreateUserParams {
@@ -161,11 +150,6 @@ func mapUserWriteError(err error, conflict error) error {
 func isEmailConflict(err error) bool {
 	var postgresError *pgconn.PgError
 	return errors.As(err, &postgresError) && postgresError.Code == "23505" && postgresError.ConstraintName == "users_email_key"
-}
-
-func isAdminConflict(err error) bool {
-	var postgresError *pgconn.PgError
-	return errors.As(err, &postgresError) && postgresError.Code == "23505" && postgresError.ConstraintName == "users_single_admin_idx"
 }
 
 var _ auth.Store = (*Store)(nil)

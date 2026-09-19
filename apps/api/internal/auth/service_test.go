@@ -82,7 +82,7 @@ func (store *memoryStore) CreateAdmin(_ context.Context, user User) error {
 	store.mu.Lock()
 	defer store.mu.Unlock()
 	if _, exists := store.users[user.Email]; exists {
-		return ErrAdminAlreadyExists
+		return ErrEmailAlreadyExists
 	}
 	store.users[user.Email] = user
 	return nil

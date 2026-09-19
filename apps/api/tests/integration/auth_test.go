@@ -3,7 +3,6 @@ package integration
 import (
 	"context"
 	"encoding/json"
-	"errors"
 	"io"
 	"log/slog"
 	"net/http"
@@ -131,10 +130,11 @@ func TestAuthenticationHTTP(t *testing.T) {
 	if err != nil || admin.Role != auth.RoleAdmin {
 		t.Fatalf("create admin = %+v, %v", admin, err)
 	}
-	if _, err := service.CreateAdmin(ctx, auth.AdminInput{
+	secondAdmin, err := service.CreateAdmin(ctx, auth.AdminInput{
 		Email: "another-admin@example.com", FirstName: "Другой", LastName: "Администратор", Password: "another-secure-password",
-	}); !errors.Is(err, auth.ErrAdminAlreadyExists) {
-		t.Fatalf("second admin error = %v", err)
+	})
+	if err != nil || secondAdmin.Role != auth.RoleAdmin {
+		t.Fatalf("create second admin = %+v, %v", secondAdmin, err)
 	}
 	response = requestJSON(t, server.Client(), http.MethodPost, server.URL+"/api/auth/login", `{
 		"email":"admin@example.com","password":"very-secure-admin-password"

@@ -3,7 +3,6 @@ package main
 import (
 	"bufio"
 	"context"
-	"errors"
 	"fmt"
 	"log/slog"
 	"os"
@@ -54,10 +53,6 @@ func createAdmin(logger *slog.Logger) error {
 		return err
 	}
 	user, err := service.CreateAdmin(ctx, input)
-	if errors.Is(err, auth.ErrAdminAlreadyExists) {
-		logger.Info("administrator already exists", "email", input.Email)
-		return nil
-	}
 	if err != nil {
 		return err
 	}
