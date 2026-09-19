@@ -1,0 +1,50 @@
+name: Check
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+concurrency:
+  group: check-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version-file: apps/api/go.mod
+          cache-dependency-path: apps/api/go.sum
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: apps/web/package-lock.json
+
+      - name: Install Moon
+        shell: bash
+        run: |
+          bash <(curl -fsSL https://moonrepo.dev/install/moon.sh)
+          echo "$HOME/.moon/bin" >> "$GITHUB_PATH"
+
+      - name: Install Vite Plus
+        run: npm install --global vite-plus@0.3.1
+
+      - name: Install web dependencies
+        run: moon run root:install
+
+      - name: Run repository checks
+        run: moon run root:check
