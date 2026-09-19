@@ -1,9 +1,13 @@
 # Dependencies
 node_modules/
 
+# Moon cache
+.moon/cache/
+
 # Build and test output
 dist/
 build/
+.build/
 coverage/
 *.tsbuildinfo
 

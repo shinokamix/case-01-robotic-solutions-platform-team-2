@@ -1,0 +1,61 @@
+id: api
+language: go
+layer: application
+stack: backend
+
+tasks:
+  dev:
+    description: Run the Go API with Air
+    command: go tool air
+    options:
+      cache: false
+      persistent: true
+
+  generate:
+    description: Generate OpenAPI and SQL code
+    script: |
+      go tool oapi-codegen --config oapi-codegen.yaml ../../packages/contracts/openapi.yaml
+      go tool sqlc generate
+    inputs:
+      - '**/*.go'
+      - 'oapi-codegen.yaml'
+      - 'sqlc.yaml'
+      - '/packages/contracts/openapi.yaml'
+    outputs:
+      - 'internal/httpapi/generated/**/*'
+      - 'internal/postgres/sqlc/**/*'
+
+  build:
+    description: Build API, admin, and migration binaries
+    command: go build ./cmd/api ./cmd/admin ./cmd/migrate
+    deps:
+      - generate
+
+  test:
+    description: Run Go tests
+    command: go tool gotestsum -- ./...
+    deps:
+      - generate
+
+  lint:
+    description: Format and vet Go code
+    script: |
+      set -e
+      test -z "$(gofmt -l .)"
+      go vet ./...
+    deps:
+      - generate
+
+  migrate:
+    description: Apply database migrations
+    command: go run ./cmd/migrate
+    options:
+      cache: false
+
+  check:
+    description: Run all API checks
+    deps:
+      - generate
+      - lint
+      - test
+      - build
