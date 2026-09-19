@@ -6,10 +6,7 @@ const nameSchema = (field: "имя" | "фамилия") =>
     .trim()
     .min(1, `Введите ${field}`)
     .max(100, `${field} не должно быть длиннее 100 символов`)
-    .regex(
-      /^[^\p{Cc}]*$/u,
-      `${field} содержит недопустимые символы`,
-    );
+    .regex(/^[^\p{Cc}]*$/u, `${field} содержит недопустимые символы`);
 
 const emailSchema = z
   .string()

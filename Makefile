@@ -29,7 +29,7 @@ web-lint:
 	vp -C apps/web run lint
 
 web-check:
-	vp -C apps/web run lint && vp -C apps/web run build
+	vp -C apps/web run check && vp -C apps/web run build
 
 web-knip:
 	vp -C apps/web run knip

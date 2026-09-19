@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vp dev",
     "build": "vp build && tsc -b",
+    "check": "vp check && knip",
     "api:generate": "orval --config orval.config.ts",
     "lint": "vp lint",
     "knip": "knip",
@@ -50,5 +51,10 @@
       "version": "12.0.2",
       "onFail": "download"
     }
+  },
+  "knip": {
+    "ignore": [
+      "src/shared/api/**"
+    ]
   }
 }

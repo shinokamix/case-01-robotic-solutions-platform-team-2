@@ -190,10 +190,7 @@ export function RegisterForm() {
                 Пароль
               </Text>
             </Field.Label>
-            <AuthFieldMotion
-              className="relative"
-              invalid={fieldState.invalid}
-            >
+            <AuthFieldMotion className="relative" invalid={fieldState.invalid}>
               <Field.Control
                 render={<Input />}
                 {...field}
@@ -205,7 +202,7 @@ export function RegisterForm() {
               />
               <button
                 type="button"
-                className="absolute bottom-0 right-1 grid size-11 place-items-center rounded-md text-white/45 outline-none transition-colors hover:text-white focus-visible:ring-2 focus-visible:ring-white/35"
+                className="absolute right-1 bottom-0 grid size-11 place-items-center rounded-md text-white/45 transition-colors outline-none hover:text-white focus-visible:ring-2 focus-visible:ring-white/35"
                 onClick={() => setShowPassword((visible) => !visible)}
                 aria-label={showPassword ? "Скрыть пароль" : "Показать пароль"}
                 title={showPassword ? "Скрыть пароль" : "Показать пароль"}
@@ -239,7 +236,7 @@ export function RegisterForm() {
       <Button
         type="submit"
         disabled={register.isPending}
-        className="h-11 w-full rounded-lg bg-white px-4 text-black outline-none transition-[background-color,transform] hover:bg-white/90 active:translate-y-px focus-visible:ring-3 focus-visible:ring-white/25 disabled:cursor-wait disabled:opacity-50"
+        className="h-11 w-full rounded-lg bg-white px-4 text-black transition-[background-color,transform] outline-none hover:bg-white/90 focus-visible:ring-3 focus-visible:ring-white/25 active:translate-y-px disabled:cursor-wait disabled:opacity-50"
       >
         <Text as="span" size="sm" bold>
           {register.isPending ? "Создаем аккаунт..." : "Создать аккаунт"}
@@ -250,7 +247,7 @@ export function RegisterForm() {
         Уже есть аккаунт?{" "}
         <Link
           to="/login"
-          className="rounded-sm font-medium text-white outline-none underline decoration-white/35 underline-offset-4 hover:decoration-white focus-visible:ring-2 focus-visible:ring-white/35"
+          className="rounded-sm font-medium text-white underline decoration-white/35 underline-offset-4 outline-none hover:decoration-white focus-visible:ring-2 focus-visible:ring-white/35"
         >
           Войти
         </Link>
