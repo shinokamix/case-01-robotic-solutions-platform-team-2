@@ -1,5 +1,5 @@
 .PHONY: dev build lint check \
-        web-dev web-build web-lint web-check web-knip web-preview
+        web-dev web-build web-lint web-check web-knip web-preview web-api-generate
 
 # Общие команды репозитория. Сейчас они делегируют задачи веб-приложению.
 # Когда появится Go-бэкенд, сюда добавятся api-* цели.
@@ -16,6 +16,9 @@ web-dev:
 
 web-build:
 	vp -C apps/web run build
+
+web-api-generate:
+	vp -C apps/web run api:generate
 
 web-lint:
 	vp -C apps/web run lint

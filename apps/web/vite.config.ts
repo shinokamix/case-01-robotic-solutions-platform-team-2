@@ -6,18 +6,18 @@ import { defineConfig, lazyPlugins } from "vite-plus";
 // https://vite.dev/config/
 export default defineConfig({
   fmt: {
-    ignorePatterns: ["src/routeTree.gen.ts"],
+    ignorePatterns: ["src/routeTree.gen.ts", "src/shared/api/**"],
     printWidth: 80,
     sortImports: true,
     sortTailwindcss: true,
   },
   lint: {
+    ignorePatterns: ["src/routeTree.gen.ts", "src/shared/api/**"],
     categories: {
       correctness: "error",
       perf: "warn",
       suspicious: "error",
     },
-    ignorePatterns: ["src/routeTree.gen.ts"],
     plugins: [
       "import",
       "jsx-a11y",
