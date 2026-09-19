@@ -1,0 +1,58 @@
+id: web
+language: javascript
+layer: application
+stack: frontend
+
+tasks:
+  dev:
+    description: Run the Vite development server
+    command: vp run dev
+    options:
+      cache: false
+      persistent: true
+
+  api-generate:
+    description: Generate the TypeScript API client from OpenAPI
+    command: vp run api:generate
+    inputs:
+      - "orval.config.ts"
+      - "/packages/contracts/openapi.yaml"
+    outputs:
+      - "src/shared/api/**/*"
+
+  build:
+    description: Build the web application and typecheck it
+    command: vp run build
+    deps:
+      - api-generate
+    inputs:
+      - "src/**/*"
+      - "index.html"
+      - "*.config.*"
+      - "package.json"
+      - "package-lock.json"
+      - "/packages/contracts/openapi.yaml"
+    outputs:
+      - "dist/**/*"
+
+  lint:
+    description: Lint the web application
+    command: vp run lint
+
+  knip:
+    description: Find unused web dependencies and exports
+    command: vp run knip
+
+  check:
+    description: Run all web checks
+    command: vp run check
+    deps:
+      - lint
+      - build
+
+  preview:
+    description: Preview the production web build
+    command: vp run preview
+    options:
+      cache: false
+      persistent: true

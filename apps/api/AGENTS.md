@@ -1,15 +1,15 @@
 # Инструкции для `apps/api`
 
-Запускайте команды из `apps/api`:
+Запускайте команды из корня репозитория через Moon:
 
 ```bash
-make dev
-make generate
-make build
-make test
-make lint
-make check
-make migrate
+moon run api:dev
+moon run api:generate
+moon run api:build
+moon run api:test
+moon run api:lint
+moon run api:check
+moon run api:migrate
 ```
 
 ## Границы
@@ -26,4 +26,4 @@ make migrate
 - `internal/httpapi/generated/openapi.gen.go`
 - `internal/postgres/sqlc/*.go`
 
-После изменений OpenAPI, миграций или SQL-запросов запускайте `make generate`.
+После изменений OpenAPI, миграций или SQL-запросов запускайте `moon run api:generate`.

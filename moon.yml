@@ -1,0 +1,120 @@
+id: root
+language: bash
+layer: tool
+
+project:
+  title: Robotics platform workspace
+  description: Shared development and CI tasks for the robotics platform.
+
+workspace:
+  inheritedTasks:
+    include: []
+
+tasks:
+  install:
+    description: Install web dependencies on the host
+    command: vp -C apps/web install
+    options:
+      cache: false
+
+  dev:
+    description: Start PostgreSQL, API, and web with Docker Compose watch mode
+    command: docker compose up --watch
+    options:
+      cache: false
+      persistent: true
+
+  dev-build:
+    description: Build development Docker images
+    command: docker compose build
+    options:
+      cache: false
+
+  dev-rebuild:
+    description: Rebuild images and start the development environment
+    command: docker compose up --build --watch
+    options:
+      cache: false
+      persistent: true
+
+  dev-down:
+    description: Stop the development environment
+    command: docker compose down --remove-orphans
+    options:
+      cache: false
+
+  dev-reset:
+    description: Remove the local database and restart the development environment
+    script: |
+      docker compose down --volumes --remove-orphans
+      docker compose up --build --watch
+    options:
+      cache: false
+      persistent: true
+
+  dev-logs:
+    description: Follow logs from all development services
+    command: docker compose logs -f
+    options:
+      cache: false
+      persistent: true
+
+  dev-ps:
+    description: Show development service status
+    command: docker compose ps
+    options:
+      cache: false
+
+  generate:
+    description: Generate API and web clients
+    deps:
+      - api:generate
+      - web:api-generate
+
+  generate-check:
+    description: Generate clients and fail when generated files are not committed
+    deps:
+      - generate
+    script: |
+      paths=(
+        apps/api/internal/httpapi/generated
+        apps/api/internal/postgres/sqlc
+        apps/web/src/shared/api
+      )
+      if [[ -n "$(git status --porcelain --untracked-files=all -- "${paths[@]}")" ]]; then
+        git status --short --untracked-files=all -- "${paths[@]}"
+        exit 1
+      fi
+    options:
+      cache: false
+
+  build:
+    description: Build API and web
+    deps:
+      - api:build
+      - web:build
+
+  lint:
+    description: Lint API and web
+    deps:
+      - api:lint
+      - web:lint
+
+  test:
+    description: Run API tests
+    deps:
+      - api:test
+
+  check:
+    description: Run all repository checks
+    deps:
+      - generate-check
+      - api:check
+      - web:check
+
+  admin-create:
+    description: Create an administrator through the running API environment
+    command: docker compose --profile tools run --rm admin create
+    options:
+      cache: false
+

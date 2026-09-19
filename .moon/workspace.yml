@@ -1,0 +1,24 @@
+projects:
+  root: '.'
+  api: 'apps/api'
+  web: 'apps/web'
+
+vcs:
+  defaultBranch: 'main'
+
+pipeline:
+  autoCleanCache: true
+  cacheLifetime: '14 days'
+  installDependencies: false
+  logRunningCommand: true
+
+hasher:
+  ignoreMissingPatterns:
+    - '**/.env'
+    - '**/.env.*'
+
+cache:
+  cas:
+    maxSize: '5gb'
+
+telemetry: false

@@ -8,36 +8,41 @@
 
 ## Запустите приложение
 
-Для запуска нужны GNU Make, Docker и Docker Compose 2.22 или новее.
+Для запуска нужны Moon, Docker и Docker Compose 2.22 или новее. На macOS, Linux и WSL установите Moon официальным установщиком:
 
-1. Установите зависимости:
+```bash
+bash <(curl -fsSL https://moonrepo.dev/install/moon.sh)
+export PATH="$HOME/.moon/bin:$PATH"
+```
 
-   ```bash
-   make install
-   ```
+Затем установите зависимости web-приложения:
 
-2. Запустите окружение:
+```bash
+moon run root:install
+```
 
-   ```bash
-   make dev
-   ```
+Запустите окружение:
 
-   Команда запускает PostgreSQL, применяет миграции, а затем запускает API и веб-приложение с hot reload.
+```bash
+moon run root:dev
+```
 
-3. Откройте веб-приложение по адресу [`http://localhost:5173`](http://localhost:5173).
+Команда запускает PostgreSQL, применяет миграции, а затем запускает API и веб-приложение с hot reload.
 
-   API доступен по адресу [`http://localhost:8080`](http://localhost:8080).
+Откройте веб-приложение по адресу [`http://localhost:5173`](http://localhost:5173). API доступен по адресу [`http://localhost:8080`](http://localhost:8080).
 
-4. Откройте форму входа или регистрации через меню приложения.
+Откройте форму входа или регистрации через меню приложения.
 
 После регистрации или входа приложение открывает авторизованную часть. Веб-приложение отправляет запросы `/api` через Vite на API, поэтому браузер использует один origin.
+
+Moon запускает задачи из корня репозитория. `docker compose` остается источником правды для локальных сервисов, а `uv`, Go и Vite Plus управляют зависимостями своих приложений.
 
 ## Создайте администратора
 
 Обычная регистрация создает пользователя с ролью `user`. Чтобы создать администратора, выполните команду после запуска окружения:
 
 ```bash
-make admin-create
+moon run root:admin-create
 ```
 
 Команда запросит email, имя, фамилию и пароль в терминале. Значения можно передать через переменные окружения:
@@ -47,7 +52,7 @@ ADMIN_EMAIL=admin@example.com \
 ADMIN_PASSWORD='change-this-password' \
 ADMIN_FIRST_NAME=Иван \
 ADMIN_LAST_NAME=Петров \
-make admin-create
+moon run root:admin-create
 ```
 
 Администраторы хранятся в той же таблице `users`, что и обычные пользователи, но получают роль `admin`. Команду можно запускать для создания нескольких администраторов. Email каждого аккаунта должен быть уникальным.
@@ -58,17 +63,21 @@ make admin-create
 
 | Команда | Назначение |
 | --- | --- |
-| `make install` | Установить зависимости веб-приложения |
-| `make dev` | Запустить PostgreSQL, миграции, API и веб-приложение |
-| `make dev-down` | Остановить контейнеры |
-| `make dev-reset` | Удалить локальную БД и запустить окружение заново |
-| `make dev-logs` | Показать логи всех сервисов |
-| `make dev-ps` | Показать состояние сервисов |
+| `moon run root:install` | Установить зависимости веб-приложения на хосте |
+| `moon run root:dev` | Запустить PostgreSQL, миграции, API и веб-приложение |
+| `moon run root:dev-build` | Собрать development-образы Docker без запуска |
+| `moon run root:dev-rebuild` | Пересобрать образы и запустить окружение |
+| `moon run root:dev-down` | Остановить контейнеры |
+| `moon run root:dev-reset` | Удалить локальную БД и запустить окружение заново |
+| `moon run root:dev-logs` | Показать логи всех сервисов |
+| `moon run root:dev-ps` | Показать состояние сервисов |
+
+`root:dev` не пересобирает существующие образы. После изменения Dockerfile или зависимостей контейнера используйте `root:dev-rebuild`. Для обычной работы исходники синхронизируются через Compose Watch без полной пересборки.
 
 Порты можно изменить через `WEB_PORT`, `API_PORT` и `POSTGRES_PORT`. Например:
 
 ```bash
-WEB_PORT=5174 API_PORT=8081 make dev
+WEB_PORT=5174 API_PORT=8081 moon run root:dev
 ```
 
 ## Проверьте код
@@ -77,22 +86,25 @@ WEB_PORT=5174 API_PORT=8081 make dev
 
 | Команда | Назначение |
 | --- | --- |
-| `make generate` | Перегенерировать Go-код, SQL-код и TypeScript-клиент |
-| `make generate-check` | Проверить, что сгенерированные файлы актуальны |
-| `make build` | Собрать API и веб-приложение |
-| `make lint` | Запустить линтеры |
-| `make test` | Запустить тесты API |
-| `make check` | Запустить проверки API и веб-приложения |
-| `make auth-test` | Запустить полный интеграционный сценарий авторизации на чистой PostgreSQL |
+| `moon run root:generate` | Перегенерировать Go-код, SQL-код и TypeScript-клиент |
+| `moon run root:generate-check` | Проверить, что сгенерированные файлы актуальны |
+| `moon run root:build` | Собрать API и веб-приложение |
+| `moon run root:lint` | Запустить линтеры |
+| `moon run web:knip` | Найти неиспользуемые web-зависимости и экспорты |
+| `moon run root:test` | Запустить тесты API |
+| `moon run root:check` | Запустить проверки API и веб-приложения |
 
-После изменения OpenAPI-контракта, SQL-запросов или миграций запустите `make generate` и добавьте обновленные сгенерированные файлы в коммит.
+`generate` обновляет сгенерированный код, а `generate-check` проверяет, что после генерации рабочее дерево не изменилось. `build`, `lint` и `test` запускают только одноименные проверки приложений. `check` объединяет проверку генерации с полными `api:check` и `web:check`. В `web:check` входят lint, build, Vite Plus check и Knip.
 
-Для команд одного приложения используйте префикс `api-` или `web-`. Например, `make api-test`, `make api-migrate`, `make web-lint` и `make web-preview`.
+После изменения OpenAPI-контракта, SQL-запросов или миграций запустите `moon run root:generate` и добавьте обновленные сгенерированные файлы в коммит.
+
+Для одного приложения используйте `moon run api:check` или `moon run web:check`. Отдельные проверки доступны через задачи вроде `moon run api:test`, `moon run api:migrate` и `moon run web:lint`.
 
 ## Структура репозитория
 
 - `apps/api/` содержит Go API, миграции PostgreSQL и команды администратора.
 - `apps/web/` содержит React-приложение.
+- `apps/ds/` зарезервирован для Python-сервиса data science и будет управляться через `uv` и Moon.
 - `packages/contracts/openapi.yaml` содержит публичный HTTP-контракт.
 - `docs/product-discovery/` содержит требования, решения и дорожную карту.
 - `artifacts/` содержит исходные материалы проекта.
