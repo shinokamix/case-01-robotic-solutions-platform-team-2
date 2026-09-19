@@ -50,11 +50,11 @@ export function RegisterForm() {
     },
   });
 
-  const onSubmit = form.handleSubmit(async (values) => {
-    await register.mutateAsync({
-      data: { ...values, email: values.email.trim() },
-    });
-    await navigate({ to: "/" });
+  const onSubmit = form.handleSubmit((values) => {
+    register.mutate(
+      { data: values },
+      { onSuccess: () => void navigate({ to: "/" }) },
+    );
   });
 
   return (
@@ -92,9 +92,11 @@ export function RegisterForm() {
                 />
               </AuthFieldMotion>
               {fieldState.error?.message && (
-                <AuthFieldError className={errorClassName}>
-                  {fieldState.error.message}
-                </AuthFieldError>
+                <Field.Error match={true}>
+                  <AuthFieldError className={errorClassName}>
+                    {fieldState.error.message}
+                  </AuthFieldError>
+                </Field.Error>
               )}
             </Field.Root>
           )}
@@ -127,9 +129,11 @@ export function RegisterForm() {
                 />
               </AuthFieldMotion>
               {fieldState.error?.message && (
-                <AuthFieldError className={errorClassName}>
-                  {fieldState.error.message}
-                </AuthFieldError>
+                <Field.Error match={true}>
+                  <AuthFieldError className={errorClassName}>
+                    {fieldState.error.message}
+                  </AuthFieldError>
+                </Field.Error>
               )}
             </Field.Root>
           )}
@@ -167,9 +171,11 @@ export function RegisterForm() {
               />
             </AuthFieldMotion>
             {fieldState.error?.message && (
-              <AuthFieldError className={errorClassName}>
-                {fieldState.error.message}
-              </AuthFieldError>
+              <Field.Error match={true}>
+                <AuthFieldError className={errorClassName}>
+                  {fieldState.error.message}
+                </AuthFieldError>
+              </Field.Error>
             )}
           </Field.Root>
         )}
@@ -215,9 +221,11 @@ export function RegisterForm() {
               </button>
             </AuthFieldMotion>
             {fieldState.error?.message ? (
-              <AuthFieldError className={errorClassName}>
-                {fieldState.error.message}
-              </AuthFieldError>
+              <Field.Error match={true}>
+                <AuthFieldError className={errorClassName}>
+                  {fieldState.error.message}
+                </AuthFieldError>
+              </Field.Error>
             ) : (
               <Text size="sm" className="mt-2 text-white/45">
                 Не менее 12 символов

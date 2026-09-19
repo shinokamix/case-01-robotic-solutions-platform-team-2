@@ -2,6 +2,17 @@ import type { ErrorResponse } from "./api/schemas";
 
 const apiUrl = import.meta.env.VITE_API_URL ?? "";
 
+function isErrorResponse(data: unknown): data is ErrorResponse {
+  return (
+    typeof data === "object" &&
+    data !== null &&
+    "code" in data &&
+    typeof data.code === "string" &&
+    "message" in data &&
+    typeof data.message === "string"
+  );
+}
+
 export class ApiError<T = unknown> extends Error {
   readonly status: number;
   readonly data: T;
@@ -27,9 +38,15 @@ export async function fetcher<T>(
     const data: unknown = await response.json().catch(() => undefined);
 
     if (!response.ok) {
-      // The API contract defines all error responses as ErrorResponse.
-      // eslint-disable-next-line typescript/no-unsafe-type-assertion
-      throw new ApiError(response.status, data as ErrorResponse);
+      throw new ApiError<ErrorResponse>(
+        response.status,
+        isErrorResponse(data)
+          ? data
+          : {
+              code: "invalid_error_response",
+              message: "Не удалось выполнить запрос.",
+            },
+      );
     }
 
     // The OpenAPI-generated endpoint type defines the expected response body.

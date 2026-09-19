@@ -42,9 +42,13 @@ export function LoginForm() {
   });
 
   const onSubmit = form.handleSubmit(async (values) => {
-    await login.mutateAsync({
-      data: { ...values, email: values.email.trim() },
-    });
+    try {
+      await login.mutateAsync({
+        data: { ...values, email: values.email.trim() },
+      });
+    } catch {
+      return;
+    }
     await navigate({ to: "/" });
   });
 
@@ -86,9 +90,11 @@ export function LoginForm() {
               />
             </AuthFieldMotion>
             {fieldState.error?.message && (
-              <AuthFieldError className={errorClassName}>
-                {fieldState.error.message}
-              </AuthFieldError>
+              <Field.Error match={true}>
+                <AuthFieldError className={errorClassName}>
+                  {fieldState.error.message}
+                </AuthFieldError>
+              </Field.Error>
             )}
           </Field.Root>
         )}
@@ -134,9 +140,11 @@ export function LoginForm() {
               </button>
             </AuthFieldMotion>
             {fieldState.error?.message && (
-              <AuthFieldError className={errorClassName}>
-                {fieldState.error.message}
-              </AuthFieldError>
+              <Field.Error match={true}>
+                <AuthFieldError className={errorClassName}>
+                  {fieldState.error.message}
+                </AuthFieldError>
+              </Field.Error>
             )}
           </Field.Root>
         )}
