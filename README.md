@@ -9,6 +9,7 @@
 Запускайте команды из корня репозитория:
 
 ```bash
+make install   # установка зависимостей
 make dev       # разработка
 make build     # сборка
 make lint      # линтер
@@ -18,6 +19,7 @@ make check     # линтер и сборка
 Команды веб-приложения:
 
 ```bash
+make web-install
 make web-dev
 make web-build
 make web-lint
