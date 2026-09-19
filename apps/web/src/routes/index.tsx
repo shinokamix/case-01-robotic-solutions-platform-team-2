@@ -8,7 +8,7 @@ function HomePage() {
   return (
     <main className="grid min-h-dvh place-items-center bg-black">
       <div className="flex w-full flex-col items-center px-6 text-center">
-        <Heading as="h1" size="md" className="max-w-3xl text-white">
+        <Heading as="h1" size="md" className="max-w-3xl">
           Подбор роботизированных решений
         </Heading>
         <Text size="md" className="mt-6 max-w-xl text-white/70">

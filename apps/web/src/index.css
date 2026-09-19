@@ -6,3 +6,9 @@
   --font-sans: "Onest Variable", sans-serif;
   --font-display: "Commissioner Variable", sans-serif;
 }
+
+@layer base {
+  body {
+    @apply bg-black text-white;
+  }
+}
