@@ -39,7 +39,8 @@ WHERE s.token_hash = $1;
 
 -- name: TouchSession :execrows
 UPDATE sessions
-SET last_seen_at = $2, idle_expires_at = $3
+SET last_seen_at = GREATEST(last_seen_at, $2),
+    idle_expires_at = GREATEST(idle_expires_at, $3)
 WHERE token_hash = $1
   AND idle_expires_at > $2
   AND absolute_expires_at > $2;

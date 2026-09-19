@@ -145,6 +145,8 @@ func parseIP(remoteAddress string) (netip.Addr, error) {
 	return address.Unmap(), err
 }
 
+const maxRateLimiterBuckets = 10_000
+
 type rateBucket struct {
 	started time.Time
 	count   int
@@ -221,7 +223,21 @@ func (limiter *RateLimiter) allow(key string) (bool, time.Duration) {
 		limiter.lastCleanup = now
 	}
 
-	bucket := limiter.buckets[key]
+	bucket, exists := limiter.buckets[key]
+	if !exists {
+		if len(limiter.buckets) >= maxRateLimiterBuckets {
+			for bucketKey, bucket := range limiter.buckets {
+				if now.Sub(bucket.started) >= limiter.window {
+					delete(limiter.buckets, bucketKey)
+				}
+			}
+			if len(limiter.buckets) >= maxRateLimiterBuckets {
+				return false, limiter.window
+			}
+		}
+		limiter.buckets[key] = rateBucket{started: now, count: 1}
+		return true, 0
+	}
 	if bucket.started.IsZero() || now.Sub(bucket.started) >= limiter.window {
 		limiter.buckets[key] = rateBucket{started: now, count: 1}
 		return true, 0

@@ -11,12 +11,12 @@ import (
 )
 
 type Config struct {
-	APIAddr         string
-	DatabaseURL     string
-	WebOrigin       string
-	CookieSecure       bool
+	APIAddr           string
+	DatabaseURL       string
+	WebOrigin         string
+	CookieSecure      bool
 	TrustedProxyCIDRs []netip.Prefix
-	ShutdownTimeout    time.Duration
+	ShutdownTimeout   time.Duration
 }
 
 func Load() (Config, error) {

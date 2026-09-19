@@ -33,7 +33,16 @@ check: api-check web-check
 generate: api-generate web-api-generate
 
 generate-check: generate
-	git diff --exit-code -- apps/api/internal/httpapi/generated apps/api/internal/postgres/sqlc apps/web/src/shared/api
+	@test -z "$$(git status --porcelain --untracked-files=all -- \
+		apps/api/internal/httpapi/generated \
+		apps/api/internal/postgres/sqlc \
+		apps/web/src/shared/api)" || { \
+		git status --short --untracked-files=all -- \
+			apps/api/internal/httpapi/generated \
+			apps/api/internal/postgres/sqlc \
+			apps/web/src/shared/api; \
+		exit 1; \
+	}
 
 auth-test:
 	@set -eu; \
