@@ -8,11 +8,17 @@
 
 ## Запустите приложение
 
-Для запуска нужны Moon, Docker и Docker Compose 2.22 или новее. На macOS, Linux и WSL установите Moon официальным установщиком:
+Для запуска нужны Node.js 24, npm, Moon, Docker и Docker Compose 2.22 или новее. На macOS, Linux и WSL установите Moon официальным установщиком:
 
 ```bash
 bash <(curl -fsSL https://moonrepo.dev/install/moon.sh)
 export PATH="$HOME/.moon/bin:$PATH"
+```
+
+Установите Vite Plus той же версии, которую использует web-приложение:
+
+```bash
+npm install --global vite-plus@0.3.1
 ```
 
 Затем установите зависимости web-приложения:
