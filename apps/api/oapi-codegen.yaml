@@ -1,0 +1,8 @@
+package: generated
+output: internal/httpapi/generated/openapi.gen.go
+generate:
+  models: true
+  chi-server: true
+  strict-server: true
+output-options:
+  skip-prune: true

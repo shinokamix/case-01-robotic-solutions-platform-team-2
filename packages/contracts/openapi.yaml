@@ -5,7 +5,7 @@ info:
   description: Контракт API авторизации платформы.
 
 servers:
-  - url: /
+  - url: /api
 
 tags:
   - name: Auth

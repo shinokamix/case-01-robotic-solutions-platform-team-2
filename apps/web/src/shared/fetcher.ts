@@ -1,6 +1,6 @@
 import type { ErrorResponse } from "./api/schemas";
 
-const apiUrl = import.meta.env.VITE_API_URL ?? "";
+const apiUrl = import.meta.env.VITE_API_URL ?? "/api";
 
 function isErrorResponse(data: unknown): data is ErrorResponse {
   return (

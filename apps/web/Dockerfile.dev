@@ -1,0 +1,6 @@
+FROM node:24.18.0-alpine
+WORKDIR /workspace/apps/web
+COPY apps/web/package.json apps/web/package-lock.json ./
+RUN npm install --global npm@12.0.2 && npm ci
+COPY apps/web ./
+CMD ["./node_modules/.bin/vp", "dev", "--host", "0.0.0.0"]
